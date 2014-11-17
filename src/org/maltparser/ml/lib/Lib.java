@@ -17,6 +17,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -35,6 +36,7 @@ import org.maltparser.ml.lib.FeatureList;
 import org.maltparser.ml.lib.MaltLibModel;
 import org.maltparser.ml.lib.MaltFeatureNode;
 import org.maltparser.ml.lib.LibException;
+import org.maltparser.net.HttpURLConnectionSend;
 import org.maltparser.parser.DependencyParserConfig;
 import org.maltparser.parser.guide.instance.InstanceModel;
 import org.maltparser.parser.history.action.SingleDecision;
@@ -211,12 +213,16 @@ public abstract class Lib implements LearningMethod {
 
 	public boolean predict(FeatureVector featureVector, SingleDecision decision) throws MaltChainedException {
 		final FeatureList featureList = new FeatureList();
+                
+                List<String> x_line_list = new ArrayList<String>();
+        
 		final int size = featureVector.size();
 		for (int i = 1; i <= size; i++) {
-			final FeatureValue featureValue = featureVector.getFeatureValue(i-1);	
+			final FeatureValue featureValue = featureVector.getFeatureValue(i-1);
 			if (featureValue != null && !(excludeNullValues == true && featureValue.isNullValue())) {
 				if (!featureValue.isMultiple()) {
 					SingleFeatureValue singleFeatureValue = (SingleFeatureValue)featureValue;
+                                        x_line_list.add(String.valueOf(singleFeatureValue.getIndexCode()));
 					final int index = featureMap.getIndex(i, singleFeatureValue.getIndexCode());
 					if (index != -1 && singleFeatureValue.getValue() != 0) {
 						featureList.add(index,singleFeatureValue.getValue());
@@ -232,6 +238,23 @@ public abstract class Lib implements LearningMethod {
 				} 
 			}
 		}
+                
+                try
+                {
+                    String formatedString = x_line_list.toString()
+                        .replace(",", "\t")
+                        .replace("[", "")
+                        .replace("]", "")
+                        .trim();
+                    String url = "http://localhost:5000/send_data/learn";
+                    String response = "";
+                    response = HttpURLConnectionSend.sendPost(url, formatedString);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                
 		try {
 			decision.getKBestList().addList(model.predict(featureList.toArray()));
 		} catch (OutOfMemoryError e) {

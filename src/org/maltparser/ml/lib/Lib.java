@@ -53,6 +53,7 @@ public abstract class Lib implements LearningMethod {
 	private final boolean excludeNullValues;
 	private BufferedWriter instanceOutput = null; 
 	protected MaltLibModel model = null;
+	public static String sk = "";
 	
 	private int numberOfInstances;
 	
@@ -213,9 +214,7 @@ public abstract class Lib implements LearningMethod {
 
 	public boolean predict(FeatureVector featureVector, SingleDecision decision) throws MaltChainedException {
 		final FeatureList featureList = new FeatureList();
-                
-                List<String> x_line_list = new ArrayList<String>();
-        
+		List<String> x_line_list = new ArrayList<String>();
 		final int size = featureVector.size();
 		for (int i = 1; i <= size; i++) {
 			final FeatureValue featureValue = featureVector.getFeatureValue(i-1);
@@ -249,7 +248,8 @@ public abstract class Lib implements LearningMethod {
                     String url = "http://localhost:5000/send_data/learn";
                     String response = "";
                     response = HttpURLConnectionSend.sendPost(url, formatedString);
-                    System.out.println(response);
+					sk = response.replace("[","").replace("]","");
+                    //System.out.println(sk);
                 }
                 catch (Exception e)
                 {

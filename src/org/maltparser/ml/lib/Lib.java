@@ -249,6 +249,7 @@ public abstract class Lib implements LearningMethod {
                     String url = "http://localhost:5000/send_data/learn";
                     String response = "";
                     response = HttpURLConnectionSend.sendPost(url, formatedString);
+                    System.out.println(response);
                 }
                 catch (Exception e)
                 {

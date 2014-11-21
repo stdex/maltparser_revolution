@@ -248,7 +248,7 @@ public abstract class Lib implements LearningMethod {
                     String url = "http://localhost:5000/send_data/learn";
                     String response = "";
                     response = HttpURLConnectionSend.sendPost(url, formatedString);
-					sk = response.replace("[","").replace("]","");
+                    sk = response.replace("[","").replace("]","");
                     //System.out.println(sk);
                 }
                 catch (Exception e)

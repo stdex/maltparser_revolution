@@ -1,6 +1,8 @@
 package org.maltparser;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.Date;
 
 import org.maltparser.core.exception.MaltChainedException;
@@ -8,6 +10,9 @@ import org.maltparser.core.helper.SystemInfo;
 import org.maltparser.core.helper.SystemLogger;
 import org.maltparser.core.options.OptionManager;
 import org.maltparser.core.plugin.PluginLoader;
+import static org.maltparser.server.CliHandler.loadmodel;
+import static org.maltparser.server.CliHandler.parseF;
+import org.maltparser.server.Main;
 
 /**
  * MaltConsoleEngine controls the MaltParser system using the console version. 
@@ -96,8 +101,35 @@ public class MaltConsoleEngine {
 		}
 		Engine engine = new Engine();
 		engine.initialize(OPTION_CONTAINER);
-		engine.process(OPTION_CONTAINER);
-		engine.terminate(OPTION_CONTAINER);
+                
+//                String command;
+//                BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+//                try
+//                {
+//                    while(true)
+//                    {
+//                        command = in.readLine().trim();
+//
+//                        if (command.isEmpty())
+//                            continue;
+//
+//                        System.out.printf("Command Receive: %s\n", command);
+//
+//                        if (command.equals("parse")) {
+                            engine.process(OPTION_CONTAINER);
+                            engine.terminate(OPTION_CONTAINER);
+//                        }
+//                        else if (command.equals("quit") || command.equals("exit"))
+//                        {
+//                            //destroy();
+//                            System.exit(0);
+//                        }
+//                        else
+//                            System.out.printf("Unknown Command: %s\n", command);
+//                    }
+//                }
+//                catch(Exception e){}
+                
 		if (SystemLogger.logger().isInfoEnabled()) {
 			SystemLogger.logger().info("Finished: " + new Date(System.currentTimeMillis())+"\n");
 		}

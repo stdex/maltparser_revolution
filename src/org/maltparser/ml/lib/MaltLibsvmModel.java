@@ -112,11 +112,11 @@ public class MaltLibsvmModel implements Serializable, MaltLibModel {
 		String check;
 		//if (Lib.sk.equals(String.valueOf(predictionList[0]))) check = "";
 		//else check = "ALERT";
-		//System.out.println(Lib.sk + " : " + String.valueOf(predictionList[0]));
-		//predictionList[0] = Integer.parseInt(Lib.sk);
+		System.out.println(Lib.sk + " : " + String.valueOf(predictionList[0]));
+		predictionList[0] = Integer.parseInt(Lib.sk);
                 
-                System.out.println(LWClassifier.sk + " : " + String.valueOf(predictionList[0]));
-		predictionList[0] = Integer.parseInt(LWClassifier.sk);
+//                System.out.println(LWClassifier.sk + " : " + String.valueOf(predictionList[0]));
+//		predictionList[0] = Integer.parseInt(LWClassifier.sk);
                 
                 //int[] predictionList_one = new int[1];
                 //predictionList_one[0] = Integer.parseInt(Lib.sk);

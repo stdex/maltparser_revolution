@@ -202,7 +202,8 @@ public class CliHandler implements Runnable
         try {
             String testDataFile = "/home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc.csv";
 
-            reader = new BufferedReader(new InputStreamReader(new File("/home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc.csv").toURI().toURL().openStream(), "UTF-8"));
+            reader = new BufferedReader(new InputStreamReader(new File("/home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc.csv").toURI().toURL().openStream(), "UTF-8"));         
+            
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("/home/rostunov/workspace/neuro/malt_prj/malt/out.txt")), "UTF-8"));
             String line = null;
             ArrayList<String> lines = new ArrayList<String>();

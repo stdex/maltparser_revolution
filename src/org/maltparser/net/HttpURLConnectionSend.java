@@ -6,6 +6,7 @@
 package org.maltparser.net;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -26,16 +27,16 @@ public class HttpURLConnectionSend {
 		con.setRequestMethod("POST");
 		con.setRequestProperty("User-Agent", USER_AGENT);
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
- 
-                // String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
- 
+
 		// Send post request
 		con.setDoOutput(true);
 		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 		wr.writeBytes(input);
 		wr.flush();
 		wr.close();
- 
+                
+//              con.setReadTimeout(1000);
+//              con.setConnectTimeout(1000);
 		int responseCode = con.getResponseCode();
 //		System.out.println("\nSending 'POST' request to URL : " + url);
 //		System.out.println("Post parameters : " + urlParameters);

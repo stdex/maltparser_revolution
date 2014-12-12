@@ -1,5 +1,7 @@
 package org.maltparser;
 
+import org.maltparser.grizzly.Config;
+
 
 /**
  * Application class in the MaltParser library.
@@ -13,7 +15,11 @@ public class Malt {
 	 * 
 	 * @param args command-line arguments
 	 */
-	public static void main(String[] args) {
+    
+	public static void main(String[] args) throws Exception {
+
+                Config.loadConfig();
+                
 		MaltConsoleEngine engine = new MaltConsoleEngine();
 		engine.startEngine(args);
 	}

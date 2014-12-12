@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import org.maltparser.core.helper.Util;
 
 import de.bwaldvogel.liblinear.SolverType;
+import static org.maltparser.ml.lib.Lib.useFlask;
 
 /**
  * <p>This class borrows code from liblinear.Model.java of the Java implementation of the liblinear package.
@@ -147,6 +148,12 @@ public class MaltLiblinearModel implements Serializable, MaltLibModel {
 				predictionList[i] = tmpObj;
 			}
 		}
+                
+                if( useFlask ) {
+                    System.out.println(Lib.sk + " : " + String.valueOf(predictionList[0]));
+                    predictionList[0] = Integer.parseInt(Lib.sk);
+                }
+                
 		return predictionList;
 	}
 	

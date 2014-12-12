@@ -7,6 +7,7 @@ import libsvm.svm_node;
 import libsvm.svm_parameter;
 import libsvm.svm_problem;
 import org.maltparser.core.lw.parser.LWClassifier;
+import static org.maltparser.ml.lib.Lib.useFlask;
 
 
 /**
@@ -109,13 +110,15 @@ public class MaltLibsvmModel implements Serializable, MaltLibModel {
 				predictionList[i] = tmp;
 			}
 		}
-		String check;
+		//String check;
 		//if (Lib.sk.equals(String.valueOf(predictionList[0]))) check = "";
 		//else check = "ALERT";
-		System.out.println(Lib.sk + " : " + String.valueOf(predictionList[0]));
-		predictionList[0] = Integer.parseInt(Lib.sk);
+                if( useFlask ) {
+                    System.out.println(Lib.sk + " : " + String.valueOf(predictionList[0]));
+                    predictionList[0] = Integer.parseInt(Lib.sk);
+                }
                 
-//                System.out.println(LWClassifier.sk + " : " + String.valueOf(predictionList[0]));
+//              System.out.println(LWClassifier.sk + " : " + String.valueOf(predictionList[0]));
 //		predictionList[0] = Integer.parseInt(LWClassifier.sk);
                 
                 //int[] predictionList_one = new int[1];

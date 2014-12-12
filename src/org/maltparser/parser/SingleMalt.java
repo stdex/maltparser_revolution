@@ -31,6 +31,8 @@ import org.maltparser.core.propagation.PropagationException;
 import org.maltparser.core.propagation.PropagationManager;
 import org.maltparser.core.symbol.SymbolTableHandler;
 import org.maltparser.core.syntaxgraph.DependencyStructure;
+import org.maltparser.grizzly.Config;
+import org.maltparser.ml.lib.Lib;
 import org.maltparser.parser.guide.ClassifierGuide;
 
 /**
@@ -210,6 +212,7 @@ public class SingleMalt implements DependencyParserConfig {
 	}
 	
 	public void parse(DependencyStructure graph) throws MaltChainedException {
+
 		if (graph.hasTokens()) {
 //			((Parser)getAlgorithm()).parse(graph);
 			parser.parse(graph);

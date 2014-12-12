@@ -10,8 +10,9 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath org.maltparser.Malt -a covnonproj -c test123 -F /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/convnonprd_small_with_outputcolumn.xml -if /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/Roma_model.xml -i /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc_test.csv -m parse -o out_test.txt -li true -cs true</exec.args>
+                <exec.args>-classpath %classpath org.maltparser.Malt -a covnonproj -c test123 -F /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/convnonprd_small_with_outputcolumn.xml -l liblinear -lx /home/rostunov/workspace/neuro/maltparser/predict -if /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/Roma_model.xml -i /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc_test.csv -m parse -o out_test.txt -li true -cs true</exec.args>
                 <exec.executable>java</exec.executable>
+                <exec.workingdir>/home/rostunov/workspace/neuro/malt_prj/malt</exec.workingdir>
             </properties>
         </action>
         <action>
@@ -24,9 +25,10 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath org.maltparser.Malt -a covnonproj -c test123 -F /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/convnonprd_small_with_outputcolumn.xml -if /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/Roma_model.xml -i /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc_test.csv -m parse -o out_test.txt -li true -cs true</exec.args>
+                <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath org.maltparser.Malt -a covnonproj -c test123 -F /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/convnonprd_small_with_outputcolumn.xml -l liblinear -lx /home/rostunov/workspace/neuro/maltparser/predict -if /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/Roma_model.xml -i /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc_test.csv -m parse -o out_test.txt -li true -cs true</exec.args>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
+                <exec.workingdir>/home/rostunov/workspace/neuro/malt_prj/malt</exec.workingdir>
             </properties>
         </action>
         <action>
@@ -39,8 +41,9 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath org.maltparser.Malt -a covnonproj -c test123 -F /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/convnonprd_small_with_outputcolumn.xml -if /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/Roma_model.xml -i /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc_test.csv -m parse -o out_test.txt -li true -cs true</exec.args>
+                <exec.args>-classpath %classpath org.maltparser.Malt -a covnonproj -c test123 -F /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/convnonprd_small_with_outputcolumn.xml -l liblinear -lx /home/rostunov/workspace/neuro/maltparser/predict -if /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/Roma_model.xml -i /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/inp_Lc_Rc_test.csv -m parse -o out_test.txt -li true -cs true</exec.args>
                 <exec.executable>java</exec.executable>
+                <exec.workingdir>/home/rostunov/workspace/neuro/malt_prj/malt</exec.workingdir>
             </properties>
         </action>
     </actions>

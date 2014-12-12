@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import org.maltparser.MaltParserService;
@@ -37,18 +38,36 @@ public class Server {
     public static final Logger logger = Logger.getLogger(Server.class.getName());
     public static ConcurrentMaltParserModel model;
     public static MaltParserService service;
+    
+    public static String maltServer;
+    public static String maltServerIP;
+    public static int maltServerPort;
+    public static String maltServerPath;
+    public static String maltLoadCommandLine;
 
-    public static void main(String[] args) throws IOException {
 
+    public static void main(String[] args) throws IOException, Exception {
+
+        Config.loadConfig();
+        
+        maltServer = Config.getStringDefault("MaltServer", "");
+        URL maltURL = new URL(maltServer);
+        maltServerIP = maltURL.getHost();
+        maltServerPort = maltURL.getPort();
+        maltServerPath = maltURL.getFile();
+        maltLoadCommandLine = Config.getStringDefault("MaltLoadCommandLine", "");
+
+        
         loadmodel();
         
         // create a basic server that listens on port 8080.
-        final HttpServer server = HttpServer.createSimpleServer();
+        final HttpServer server = HttpServer.createSimpleServer(maltServerIP, maltServerPort);
+        //final HttpServer server = HttpServer.createSimpleServer();
 
         final ServerConfiguration config = server.getServerConfiguration();
 
         // Map the path, /echo, to the NonBlockingHandler
-        config.addHttpHandler(new NonBlockingHandler(), "/echo");
+        config.addHttpHandler(new NonBlockingHandler(), maltServerPath);
 
         try {
             server.start();
@@ -67,7 +86,7 @@ public class Server {
         
         try {
             service =  new MaltParserService();
-            service.initializeParserModel("-a covnonproj -c test123 -F /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/convnonprd_small_with_outputcolumn.xml -if /home/rostunov/workspace/neuro/malt_prj/malt/resource/data/Roma_model.xml -m parse -li true -cs true");
+            service.initializeParserModel(maltLoadCommandLine);
         } catch (Exception e) {
                 e.printStackTrace();
         }

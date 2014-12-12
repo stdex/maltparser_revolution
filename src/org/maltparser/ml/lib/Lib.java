@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -30,6 +32,7 @@ import org.maltparser.core.feature.value.FeatureValue;
 import org.maltparser.core.feature.value.MultipleFeatureValue;
 import org.maltparser.core.feature.value.SingleFeatureValue;
 import org.maltparser.core.syntaxgraph.DependencyStructure;
+import org.maltparser.grizzly.Config;
 import org.maltparser.ml.LearningMethod;
 import org.maltparser.ml.lib.FeatureMap;
 import org.maltparser.ml.lib.FeatureList;
@@ -56,6 +59,12 @@ public abstract class Lib implements LearningMethod {
 	public static String sk = "";
 	
 	private int numberOfInstances;
+        
+        public static Boolean useFlask;
+        public static String flaskServer;
+        public static String flaskServerIP;
+        public static String flaskServerPort;
+        public static String flaskServerPath;
 	
 	/**
 	 * Constructs a Lib learner.
@@ -237,30 +246,37 @@ public abstract class Lib implements LearningMethod {
 				} 
 			}
 		}
+
+                flaskServer = Config.getStringDefault("FlaskServer", "");
+                useFlask = Config.getBoolDefault("UseFlask", false);
                 
-                try
-                {
-                    String formatedString = x_line_list.toString()
-                        .replace(",", "\t")
-                        .replace("[", "")
-                        .replace("]", "")
-                        .trim();
-                    String url = "http://localhost:5000/send_data/learn";
-                    String response = "";
-                    response = HttpURLConnectionSend.sendPost(url, formatedString);
-                    sk = response.replace("[","").replace("]","");
-                    //System.out.println(sk);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
+                if( useFlask ) {
+                    try
+                    {
+                        String formatedString = x_line_list.toString()
+                            .replace(",", "\t")
+                            .replace("[", "")
+                            .replace("]", "")
+                            .trim();
+                        String url = flaskServer;
+                        String response = "";
+                        response = HttpURLConnectionSend.sendPost(url, formatedString);
+                        sk = response.replace("[","").replace("]","");
+                        //System.out.println(sk);
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
                 
-		try {
-			decision.getKBestList().addList(model.predict(featureList.toArray()));
-		} catch (OutOfMemoryError e) {
-			throw new LibException("Out of memory. Please increase the Java heap size (-Xmx<size>). ", e);
-		}
+                try {
+                        decision.getKBestList().addList(model.predict(featureList.toArray()));
+                } catch (OutOfMemoryError e) {
+                        throw new LibException("Out of memory. Please increase the Java heap size (-Xmx<size>). ", e);
+                }
+                
+                
 		return true;
 	}
 		

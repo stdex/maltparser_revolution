@@ -37,52 +37,24 @@ public class NonBlockingHandler extends HttpHandler {
             //BufferedReader reader = null;
             try {
                 //in = request.getReader(); // put the stream in blocking mode
-                  InputStream is = request.getInputStream();
+                  InputStream is = request.getInputStream();              
                   //out = response.getWriter();
                   OutputStream osm = response.getOutputStream();
                   out = new BufferedWriter(new OutputStreamWriter(osm, "UTF-8"));
-                  
-//                InputStreamReader isr = new InputStreamReader(request.getInputStream(), "UTF-8");
-//                out = response.getWriter();
-//
-//                reader = new BufferedReader(isr);
-                
-//                StringBuilder builr = new StringBuilder();
-//                String aux = "";
-//
-//                while ((aux = reader.readLine()) != null) {
-//                    builr.append(aux);
-//                }
-//
-//                System.out.println(builr.toString());
-                
+  
                 InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-                int read;
-                StringBuilder builder = new StringBuilder();
-                while ((read = isr.read(buf)) != -1) {
-                    builder.append(buf, 0, read);
-                    //out.write(buf, 0, read); // echo the contents of 'buf' to the client
+                
+                BufferedReader tempbr = new BufferedReader(isr);
+                String formatedString = "";
+                String line;
+                while ( (line = tempbr.readLine()) != null ) {
+                    System.out.println(line.trim().replace("\"", ""));
+                    formatedString = formatedString + "\n" + line.trim().replace("\"", "");
                 }
-                //System.out.println(builder.toString());
-                String formatedString = builder.toString().trim();
-                //System.out.println("--------------------");
-                //System.out.println(formatedString);
-                //System.out.println("--------------------");
 
-                StringReader sr = new StringReader(formatedString);
+                StringReader sr = new StringReader(formatedString.trim());
                 BufferedReader br = new BufferedReader(sr);
-//                
-//
-//                StringBuilder builr = new StringBuilder();
-//                String aux = "";
-//
-//                while ((aux = br.readLine()) != null) {
-//                    builr.append(aux);
-//                }
 
-//                System.out.println(builr.toString());
-                
-                
                 String outString = "";
                 outString = parseM(br);
       

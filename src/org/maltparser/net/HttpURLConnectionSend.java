@@ -27,11 +27,14 @@ public class HttpURLConnectionSend {
 		con.setRequestMethod("POST");
 		con.setRequestProperty("User-Agent", USER_AGENT);
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+                con.setRequestProperty("accept-charset", "UTF-8");
+                con.setRequestProperty("content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
 		// Send post request
 		con.setDoOutput(true);
 		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		wr.writeBytes(input);
+                wr.write(input.getBytes("UTF-8"));
+                //wr.writeUTF(input);
 		wr.flush();
 		wr.close();
                 

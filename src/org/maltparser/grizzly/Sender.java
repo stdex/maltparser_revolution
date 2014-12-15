@@ -22,11 +22,11 @@ public class Sender {
 //      String exampleString = ""; 
 //      InputStream stream = new ByteArrayInputStream(exampleString.getBytes(StandardCharsets.UTF_8));
         
-        reader = new BufferedReader(new InputStreamReader(new File("/home/rostunov/workspace/neuro/malt_prj/malt/resource/data/test_NRCinMALT_OF.txt").toURI().toURL().openStream(), "UTF-8"));
+        reader = new BufferedReader(new InputStreamReader(new File("/home/rostunov/workspace/neuro/malt_prj/malt/resource/data/test_NRCinMALT_OF_10.txt").toURI().toURL().openStream(), "UTF-8"));
         
         //String formatedString = IOUtils.toString(reader);
         String formatedString = "";
-        String line = "";
+        String line;
         while ( (line = reader.readLine()) != null ) {
             formatedString = formatedString + "\n" + line;
         }

@@ -45,17 +45,20 @@ public class HttpURLConnectionSend {
 //		System.out.println("Post parameters : " + urlParameters);
 //		System.out.println("Response Code : " + responseCode);
  
+
+                
                 BufferedReader in = new BufferedReader(
 		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
- 
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
+//		String inputLine;
+//		StringBuffer response = new StringBuffer();
+// 
+//		while ((inputLine = in.readLine()) != null) {
+//			response.append(inputLine);
+//		}
+                String response = org.apache.commons.io.IOUtils.toString(in);
 		in.close();
- 
-		return response.toString();
+    
+		return response;
  
 	}
  

@@ -44,16 +44,16 @@ public class NonBlockingHandler extends HttpHandler {
   
                 InputStreamReader isr = new InputStreamReader(is, "UTF-8");
                 
-                BufferedReader tempbr = new BufferedReader(isr);
-                String formatedString = "";
-                String line;
-                while ( (line = tempbr.readLine()) != null ) {
-                    System.out.println(line.trim().replace("\"", ""));
-                    formatedString = formatedString + "\n" + line.trim().replace("\"", "");
-                }
-
-                StringReader sr = new StringReader(formatedString.trim());
-                BufferedReader br = new BufferedReader(sr);
+                BufferedReader br = new BufferedReader(isr);
+//                String formatedString = "";
+//                String line;
+//                while ( (line = tempbr.readLine()) != null ) {
+//                    System.out.println(line.trim().replace("\"", ""));
+//                    formatedString = formatedString + "\n" + line.trim().replace("\"", "");
+//                }
+//
+//                StringReader sr = new StringReader(formatedString.trim());
+//                BufferedReader br = new BufferedReader(sr);
 
                 String outString = "";
                 outString = parseM(br);

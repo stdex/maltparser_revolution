@@ -151,7 +151,9 @@ public class MaltLiblinearModel implements Serializable, MaltLibModel {
                 
                 if( useFlask ) {
                     System.out.println(Lib.sk + " : " + String.valueOf(predictionList[0]));
-                    predictionList[0] = Integer.parseInt(Lib.sk);
+                    if(!Lib.sk.equals("0")) {
+                        predictionList[0] = Integer.parseInt(Lib.sk);
+                    }
                 }
                 
 		return predictionList;

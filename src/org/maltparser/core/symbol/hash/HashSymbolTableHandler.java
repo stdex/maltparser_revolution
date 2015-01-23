@@ -22,7 +22,7 @@ import org.maltparser.core.symbol.SymbolTableHandler;
 
 
 public class HashSymbolTableHandler implements SymbolTableHandler {
-	private final Map<String,  HashSymbolTable> symbolTables;
+	public static Map<String,  HashSymbolTable> symbolTables;
 	
 	public HashSymbolTableHandler() { 
 		this.symbolTables = new HashMap<String, HashSymbolTable>();

@@ -22,11 +22,11 @@ import org.maltparser.core.symbol.nullvalue.NullValues.NullValueId;
 
 
 public final class HashSymbolTable implements SymbolTable {
-	private final String name;
-	private final Map<String, Integer> symbolCodeMap;
-	private final SortedMap<Integer, String> codeSymbolMap;
+	public String name;
+	public Map<String, Integer> symbolCodeMap;
+	public SortedMap<Integer, String> codeSymbolMap;
 	private final NullValues nullValues;
-	private final int columnCategory;
+	public int columnCategory;
 	private int valueCounter;
 	
 	public HashSymbolTable(String name, int columnCategory, String nullValueStrategy) throws MaltChainedException {

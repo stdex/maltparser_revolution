@@ -60,7 +60,7 @@ public class ConfigurationDir  {
 	protected BufferedWriter infoFile = null;
 	protected String createdByMaltParserVersion;
 
-	private SymbolTableHandler symbolTables;
+	public static SymbolTableHandler symbolTables;
 	private DataFormatManager dataFormatManager;
 	private HashMap<String,DataFormatInstance> dataFormatInstances;
 	private URL inputFormatURL; 

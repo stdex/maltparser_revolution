@@ -21,13 +21,13 @@ import org.maltparser.core.symbol.nullvalue.OutputNullValues;
 import org.maltparser.core.symbol.nullvalue.NullValues.NullValueId;
 
 
-public final class HashSymbolTable implements SymbolTable {
+public class HashSymbolTable implements SymbolTable {
 	public String name;
 	public Map<String, Integer> symbolCodeMap;
 	public SortedMap<Integer, String> codeSymbolMap;
-	private final NullValues nullValues;
+	public final NullValues nullValues;
 	public int columnCategory;
-	private int valueCounter;
+	public int valueCounter;
 	
 	public HashSymbolTable(String name, int columnCategory, String nullValueStrategy) throws MaltChainedException {
 		this.name = name;

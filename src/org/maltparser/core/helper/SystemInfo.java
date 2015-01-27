@@ -25,8 +25,10 @@ public class SystemInfo {
 			} catch (IOException e) {
 				
 			}
-			version = properties.getProperty("version", "undef");
-			buildDate = properties.getProperty("builddate", "undef");
+                        version = "1.8";
+                        buildDate = "May 5 2014";
+//			version = properties.getProperty("version", "undef");
+//			buildDate = properties.getProperty("builddate", "undef");
 		} else {
 			version = "undef";
 			buildDate = "undef";

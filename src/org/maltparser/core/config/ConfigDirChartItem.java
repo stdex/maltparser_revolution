@@ -13,6 +13,7 @@ import org.maltparser.core.helper.SystemLogger;
 import org.maltparser.core.options.OptionManager;
 import org.maltparser.core.symbol.hash.HashSymbolTable;
 import static org.maltparser.core.symbol.hash.HashSymbolTableHandler.symbolTables;
+import org.maltparser.grizzly.Config;
 
 /**
 *
@@ -144,23 +145,36 @@ public class ConfigDirChartItem extends ChartItem {
 			configDir.terminate();
 			configDir.deleteConfigDirectory();
 		} else if (taskName.equals("savesymboltables")) {
-                    
+
                     //System.out.println(symbolTables);
                     //System.out.println(configDir.getSymbolTables().printSymbolTables());
-                    for (HashSymbolTable table : symbolTables.values()) {
-                        if(table.name.equals("FEATS")) {
-                            for (Integer code : table.codeSymbolMap.keySet()) {
-                                if(code == 1) {
-                                   table.codeSymbolMap.put(1,"123");
-                                   System.out.println(code+"\t"+table.codeSymbolMap.get(code));
-                                   //table.symbolCodeMap.put("123",1);
-                                   //System.out.println(code+"\t"+table.codeSymbolMap.get(code));
-                                }
-                            }
-                           //System.out.println(table.codeSymbolMap); 
+                    
+                    
+//                    for (HashSymbolTable table : symbolTables.values()) {
+//                        //table.codeSymbolMap.clear();
+//                        
+//                        if(table.name.equals("FEATS")) {
+//                            for (Integer code : table.codeSymbolMap.keySet()) {
+//                                if(code == 1) {
+//                                   System.out.println(table.codeSymbolMap);
+//                                   
+//                                   table.codeSymbolMap.put(1,"123");
+//                                   //System.out.println(code+"\t"+table.codeSymbolMap.get(code));
+//                                   //table.symbolCodeMap.put("123",1);
+//                                   //System.out.println(code+"\t"+table.codeSymbolMap.get(code));
+//                                }
+//                            }
+//                           //System.out.println(table.codeSymbolMap); 
+//                        }
+//                        
+//                    }
+                        String replaceSym = Config.getStringDefault("replaceSym", "");
+                        String newSymPath = Config.getStringDefault("newSymPath", "");
+                        
+                        if(replaceSym.equals("1")) {
+                            configDir.getSymbolTables().load(newSymPath, inCharSet); 
                         }
                         
-                    }
 			configDir.getSymbolTables().save(configDir.getOutputStreamWriter("symboltables.sym", outCharSet));
 		}
 		return signal;
